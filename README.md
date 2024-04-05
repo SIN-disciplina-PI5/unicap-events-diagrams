@@ -70,7 +70,7 @@ classDiagram
         + listarCertificados(): List<Certificado>
         + definirLimiteParticipantes(limite: int)
         + alterarModalidade(modalidade: string)
-        + verificarDisponibilidade(: bool)
+        + verificarPermissao(permissao: string): bool
     }
 
     ...
@@ -99,7 +99,7 @@ sequenceDiagram
 erDiagram
     entity Usuario {
         usuarioID: int PK
-        nome: string
+        name: string
         email: string
         telefone: string
         tipoUsuario: string
