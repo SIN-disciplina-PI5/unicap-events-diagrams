@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    autonumber
+    Usuario->Sistema: Realizar login (email, senha)
+    Sistema->Usuario: Validar login (autenticação)
+    alt Autenticação bem sucedida
+        Sistema->Usuario: Exibir tela inicial
+    else Autenticação falhou
+        Sistema->Usuario: Exibir mensagem de erro
+        Usuario->Sistema: Tentar novamente
+    end
+
+

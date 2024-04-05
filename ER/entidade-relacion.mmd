@@ -1,0 +1,94 @@
+erDiagram
+    Usuario {
+        int usuarioID PK
+        string nome
+        string email
+        string telefone
+        string tipoUsuario
+        string permissao
+    }
+
+    Evento {
+        int eventoID PK
+        string nome
+        string descricao
+        datetime dataInicio
+        datetime dataTermino
+        string modalidade
+        int limiteParticipantes
+    }
+
+    Atividade {
+        int atividadeID PK
+        string nome
+        string descricao
+        datetime dataHoraInicio
+        datetime dataHoraTermino
+        decimal valor
+        int quantidadeVagas
+        int localID FK
+    }
+
+    Local {
+        int localID PK
+        string nome
+        string descricao
+        int capacidade
+        string equipamentos
+    }
+
+    Inscricao {
+        int inscricaoID PK
+        int usuarioID FK
+        int atividadeID FK
+        decimal valorTotal
+        string formaPagamento
+        string statusPagamento
+    }
+
+    Certificado {
+        int certificadoID PK
+        int atividadeID FK
+        int usuarioID FK
+        datetime dataEmissao
+        string codigoVerificacao
+    }
+
+    Submissao {
+        int submissaoID PK
+        int usuarioID FK
+        int eventoID FK
+        int atividadeID FK
+        string tituloTrabalho
+        string descricao
+        blob arquivo
+        datetime dataSubmissao
+        string status
+    }
+
+    Ordem {
+        int ordemID PK
+        int usuarioID FK
+        datetime dataCriacao
+        decimal valorTotal
+        string formaPagamento
+        string statusPagamento
+        string codigoPagamento
+    }
+
+    Usuario ||--o{ Evento : organiza
+    Usuario ||--o{ Atividade : participa
+    Usuario ||--o{ Inscricao : faz
+    Usuario ||--o{ Certificado : recebe
+    Usuario ||--o{ Submissao : submete
+    Usuario ||--o{ Ordem : gera
+
+    Evento ||--o{ Atividade : compreende
+    Evento ||--o{ Submissao : recebe
+
+    Atividade ||--o{ Local : utiliza
+    Atividade ||--o{ Inscricao : permite
+    Atividade ||--|| Certificado : gera
+
+    Inscricao }|--|{ Usuario : de
+    Certificado }|--|{ Usuario : para
