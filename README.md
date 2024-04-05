@@ -97,23 +97,23 @@ sequenceDiagram
 
 ```mermaid
 erDiagram
-    entity Usuario {
-        usuarioID: int PK
-        name: string
-        email: string
-        telefone: string
-        tipoUsuario: string
-        permissao: string
+    Usuario {
+        int usuarioID PK
+        string name
+        string email
+        string telefone
+        string tipoUsuario
+        string permissao
     }
 
-    entity Evento {
-        eventoID: int PK
-        nome: string
-        descricao: string
-        dataInicio: datetime
-        dataTermino: datetime
-        modalidade: string
-        limiteParticipantes: int
+    Evento {
+        int eventoID PK
+        string nome
+        string descricao
+        datetime dataInicio
+        datetime dataTermino
+        string modalidade
+        int limiteParticipantes
     }
 
     ...
