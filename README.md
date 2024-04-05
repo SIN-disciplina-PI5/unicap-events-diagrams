@@ -70,7 +70,7 @@ classDiagram
         + listarCertificados(): List<Certificado>
         + definirLimiteParticipantes(limite: int)
         + alterarModalidade(modalidade: string)
-        + verificarDisponibilidade(): bool
+        + verificarDisponibilidade(: bool)
     }
 
     ...
