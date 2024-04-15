@@ -1,0 +1,91 @@
+erDiagram
+   Usuario ||--o{ Ordem : realiza
+   Usuario ||--o{ Inscricao : faz
+   Usuario ||--o{ Submissao : submete
+   Usuario ||--o{ Certificado : recebe
+   Evento ||--|{ Atividade : inclui
+   Evento ||--o{ Ingresso : emite
+   Evento ||--|| Inscricao : recebe
+   Evento ||--|| Submissao : recebe
+   Evento ||--|| Certificado : gera
+   Atividade ||--o{ Inscricao : inclui
+   Atividade ||--o{ Submissao : recebe
+   Atividade ||--|| Local : realizada_em
+   Ordem ||--o{ Ingresso : inclui
+   Inscricao ||--o{ Atividade : inscreve
+
+   Usuario {
+       int usuarioID
+       string nome
+       string email
+       string telefone 
+       string ra
+       string tipoUsuario
+       string permissao
+   }
+
+   Evento {
+       int eventoID
+       string nome
+       string descricao
+       datetime dataInicio
+       datetime dataTermino
+       string modalidade
+       int limiteParticipantes
+   }
+
+   Atividade {
+       int atividadeID
+       string nome
+       string descricao
+       datetime dataHoraInicio
+       datetime dataHoraTermino
+       decimal valor
+       int quantidadeVagas
+   }
+
+   Local {
+       int localID
+       string nome
+       string descricao
+       int capacidade
+       string equipamentos
+   }
+
+   Ordem {
+       int ordemID
+       datetime dataCriacao
+       decimal valorTotal
+       string formaPagamento
+       string statusPagamento
+       string codigoPagamento
+   }
+
+   Ingresso {
+       int ingressoID
+       int inscricaoID
+       string codigoIngresso
+       datetime dataEmissao
+   }
+
+   Inscricao {
+       int inscricaoID
+       decimal valorTotal
+       string formaPagamento
+       string statusPagamento
+   }
+
+   Certificado {
+       int certificadoID
+       datetime dataEmissao
+       string codigoVerificacao
+   }
+
+   Submissao {
+       int submissaoID
+       string tituloTrabalho
+       string descricao
+       blob arquivo
+       datetime dataSubmissao
+       string status
+   }
