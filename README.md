@@ -196,8 +196,8 @@ classDiagram
     Atividade ..> Local
     Ordem ..> Ingresso
     Inscricao ..> Atividade
-  
-    ...
+
+    end
 ```
 
 **Diagrama de Sequência:**
@@ -312,5 +312,5 @@ erDiagram
        string status
    }
 
-    ...
+    end
 ```
