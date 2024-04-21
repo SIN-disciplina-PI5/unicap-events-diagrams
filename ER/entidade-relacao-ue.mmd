@@ -1,91 +1,86 @@
 erDiagram
-   Usuario ||--o{ Ordem : realiza
-   Usuario ||--o{ Inscricao : faz
-   Usuario ||--o{ Submissao : submete
-   Usuario ||--o{ Certificado : recebe
-   Evento ||--|{ Atividade : inclui
-   Evento ||--o{ Ingresso : emite
-   Evento ||--|| Inscricao : recebe
-   Evento ||--|| Submissao : recebe
-   Evento ||--|| Certificado : gera
-   Atividade ||--o{ Inscricao : inclui
-   Atividade ||--o{ Submissao : recebe
-   Atividade ||--|| Local : realizada_em
-   Ordem ||--o{ Ingresso : inclui
-   Inscricao ||--o{ Atividade : inscreve
+    Users ||--o{ Orders : has
+    Orders ||--o{ Tickets : has
+    Users ||--o{ Certificado : obtains
+    Sub_events ||--o{ Certificado : belongs_to
+    Users ||--o{ Submissao : makes
+    Events ||--o{ Submissao : belongs_to
+    Sub_events ||--|{ Submissao : optionally_belongs_to
+    Events ||--|{ Sub_events : has
+    Sub_events ||--o{ Addresses : has
 
-   Usuario {
-       int usuarioID
-       string nome
-       string email
-       string telefone 
-       string ra
-       string tipoUsuario
-       string permissao
-   }
+    Users {
+        int id PK
+        varchar name
+        varchar email
+        varchar password
+        varchar phone
+        varchar type
+        varchar permission
+    }
 
-   Evento {
-       int eventoID
-       string nome
-       string descricao
-       datetime dataInicio
-       datetime dataTermino
-       string modalidade
-       int limiteParticipantes
-   }
+    Orders {
+        int id PK
+        int user_id FK
+        int ticket_id FK
+        decimal total_value
+        varchar payment_method
+        varchar status_payment
+        datetime payment_at
+        varchar code
+    }
 
-   Atividade {
-       int atividadeID
-       string nome
-       string descricao
-       datetime dataHoraInicio
-       datetime dataHoraTermino
-       decimal valor
-       int quantidadeVagas
-   }
+    Tickets {
+        int id PK
+        int event_id FK
+        int sub_event_id FK
+        varchar status
+        varchar codigoingresso
+        datetime created_at
+    }
 
-   Local {
-       int localID
-       string nome
-       string descricao
-       int capacidade
-       string equipamentos
-   }
+    Certificado {
+        int id PK
+        int user_id FK
+        int sub_event_id FK
+        datetime created_at
+        uuid verification_code
+    }
 
-   Ordem {
-       int ordemID
-       datetime dataCriacao
-       decimal valorTotal
-       string formaPagamento
-       string statusPagamento
-       string codigoPagamento
-   }
+    Submissao {
+        int SubmissaoID PK
+        int UsuarioID FK
+        int EventoID FK
+        int AtividadeID FK
+        varchar TituloTrabalho
+        text Descricao
+        blob Arquivo
+        datetime DataSubmissao
+        varchar Status
+    }
 
-   Ingresso {
-       int ingressoID
-       int inscricaoID
-       string codigoIngresso
-       datetime dataEmissao
-   }
+    Events {
+        int id PK
+        varchar name
+        text description
+        datetime start_date
+        datetime end_date
+    }
 
-   Inscricao {
-       int inscricaoID
-       decimal valorTotal
-       string formaPagamento
-       string statusPagamento
-   }
+    Sub_events {
+        int id PK
+        varchar name
+        text description
+        datetime start_date
+        datetime end_date
+        int event_id FK
+        decimal value
+        int quantity
+    }
 
-   Certificado {
-       int certificadoID
-       datetime dataEmissao
-       string codigoVerificacao
-   }
-
-   Submissao {
-       int submissaoID
-       string tituloTrabalho
-       string descricao
-       blob arquivo
-       datetime dataSubmissao
-       string status
-   }
+    Addresses {
+        int id PK
+        int sub_event_id FK
+        varchar block
+        varchar floor
+    }
